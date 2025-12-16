@@ -1,8 +1,9 @@
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../assets/utils/firebase.utils';
-
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase.utils'
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import './sign-up-form.styles.scss'
+
 const defaultFormFields = {
     'displayName': '',
     'email': '',
@@ -30,20 +31,29 @@ const SignUpForm = () => {
 
             await createUserDocumentFromAuth(user, { displayName })
 
-            // resetFormFields()
+            resetFormFields()
 
         } catch (error) {
-            console.log('User Creation failed: ', error)
+            switch(error.code) {
+                case 'auth/email-already-in-use':
+                    alert('Cannot create user, email already in use');
+                    break
+
+                default:
+                    alert(`User Creation Failed: ${error}. Error Code: ${error.code}`)
+            }
+            console.log('error signing in: ', error)
         }
 
     }
-    console.log(formFields)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value })
     }
     return (
-        <div>
+        <div className='sign-up-container'>
+            <h2>I do not have an account</h2>
+            <span>Sign up with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput label="Display Name" onChange={handleChange} type="text" name="displayName" value={displayName} required />
                 <FormInput label="Email" onChange={handleChange} type="email" name="email" value={email} required />
