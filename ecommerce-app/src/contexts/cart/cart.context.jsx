@@ -5,6 +5,10 @@ export const CartContext = createContext({
     setIsCartOpen: () => {},
     cartItems: [],
     addItemToCart: () => {},
+    subtractItemFromCart: () => {},
+    deleteItemFromCart: () => {},
     cartCount: 0,
     setCartCount: () => {},
+    totalPrice: 0,
+    setTotalPrice: () => {},
 })
