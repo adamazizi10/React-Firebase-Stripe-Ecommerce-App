@@ -11,7 +11,7 @@ export const cartReducer = (prevState = CART_INITIAL_STATE, action = {}) => {
     const { type, payload } = action
 
     switch (type) {
-        case CART_ACTION_TYPES.UPDATE_CART_ITEMS:
+        case CART_ACTION_TYPES.SET_CART_ITEMS:
             return {
                 ...prevState,
                 ...payload

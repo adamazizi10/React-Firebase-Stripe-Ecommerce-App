@@ -39,7 +39,7 @@ const subtractCartItem = (cartItems, cartItemToRemove) => {
 
 
 
-export const updateCartItemsReducer = (cartItems, product, action) => {
+export const setCartItems = (cartItems, product, action) => {
     let newCartItems
 
     switch (action) {
@@ -59,7 +59,7 @@ export const updateCartItemsReducer = (cartItems, product, action) => {
             throw new Error('wrong action')
     }
 
-    return createAction(CART_ACTION_TYPES.UPDATE_CART_ITEMS, { cartItems: newCartItems })
+    return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, { cartItems: newCartItems })
 }
 
 
