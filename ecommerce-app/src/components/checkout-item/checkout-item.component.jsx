@@ -1,15 +1,15 @@
 import { CheckItemContainer, ImageContainer, Image, ItemCell, ArrowDiv, ValueSpan, RemoveButtonDiv, QuantityItemCell } from './checkout-item.styles.jsx'
-import { useContext } from 'react'
-import { CartContext } from '../../contexts/cart/cart.context'
+import { updateCartItemsReducer } from '../../store/cart/cart.action.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCartItems } from '../../store/cart/cart.selector.js'
 
 const CheckoutItem = ({cartItem}) => {
     const { name, imageUrl, price, quantity } = cartItem
-
-    const { addItemToCart, subtractItemFromCart, deleteItemFromCart } = useContext(CartContext)
-    
-    const deleteItemFromCartHandler = () => deleteItemFromCart(cartItem)
-    const addItemToCartHandler = () => addItemToCart(cartItem)
-    const subtractItemFromCartHandler = () => subtractItemFromCart(cartItem)
+    const cartItems = useSelector(selectCartItems)
+    const dispatch = useDispatch()
+    const deleteItemFromCartHandler = () => dispatch(updateCartItemsReducer(cartItems, cartItem, 'delete'))
+    const addItemToCartHandler = () => dispatch(updateCartItemsReducer(cartItems, cartItem, 'add'))
+    const subtractItemFromCartHandler = () => dispatch(updateCartItemsReducer(cartItems, cartItem, 'subtract'))
 
     return (
         <CheckItemContainer>
