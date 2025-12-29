@@ -38,7 +38,6 @@ const subtractCartItem = (cartItems, cartItemToRemove) => {
 }
 
 
-
 export const setCartItems = (cartItems, product, action) => {
     let newCartItems
 
